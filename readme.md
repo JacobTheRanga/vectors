@@ -1,0 +1,1 @@
+script so i never have to deal with vectors ever again
