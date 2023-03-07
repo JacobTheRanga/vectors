@@ -7,7 +7,11 @@ def unitVector(vector, dimensions):
     modulus = sqrt(modulus)
     for i in range(dimensions):
         vector[i] = round(vector[i]/modulus, 4)
-    return print('Unit Vector: ', vector)
+    print('Unit Vector: ', vector)
+    txt = input('Convert to position?[Y/N] ')
+    if txt.lower() == 'y':
+        magnitude = float(input('Magnitude: '))
+        return positionVector(vector, magnitude, dimensions)
 
 def positionVector(vector, magnitude, dimensions):
     for i in range(dimensions):
@@ -16,13 +20,13 @@ def positionVector(vector, magnitude, dimensions):
 
 def main():
     vectorType = input('Current Vector Type: ')
-    dimensions = int(input('How many dimensions to the vector: '))
+    dimensions = int(input('Vector Dimensions: '))
     vectorIn = []
     for i in range(dimensions):
         vectorIn.append(float(input(f'Vector [{i}]: ')))
     if vectorType.split()[0] != 'unit':
         return unitVector(vectorIn, dimensions)
-    magnitude = float(input('What is the magnitude: '))
+    magnitude = float(input('Magnitude: '))
     return positionVector(vectorIn, magnitude, dimensions)
 
 if __name__ == '__main__':
