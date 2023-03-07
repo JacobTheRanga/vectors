@@ -1,25 +1,29 @@
-from math import *
+from math import sqrt
 
 def unitVector(vector, dimensions):
-    modulus = 1
-    for i in dimensions:
-        modulus *= vector[i]**2
+    modulus = 0
+    for i in range(dimensions):
+        modulus += vector[i]**2
     modulus = sqrt(modulus)
+    for i in range(dimensions):
+        vector[i] = round(vector[i]/modulus, 4)
+    return print('Unit Vector: ', vector)
 
-
-def positionVector(vector, dimensions):
-    
+def positionVector(vector, magnitude, dimensions):
+    for i in range(dimensions):
+        vector[i] = round(vector[i]*magnitude, 4)
+    return print('Position Vector: ', vector)
 
 def main():
-    vectorType = input('Vector Type: ')
+    vectorType = input('Current Vector Type: ')
     dimensions = int(input('How many dimensions to the vector: '))
     vectorIn = []
-    numToDimensions = ['x','y','z']
     for i in range(dimensions):
-        vectorIn.append(float(input(f'Vector [{numToDimensions[i]}]')))
-    if vectorType != 'unit':
+        vectorIn.append(float(input(f'Vector [{i}]: ')))
+    if vectorType.split()[0] != 'unit':
         return unitVector(vectorIn, dimensions)
-    return positionVector(vectorIn, dimensions)
+    magnitude = float(input('What is the magnitude: '))
+    return positionVector(vectorIn, magnitude, dimensions)
 
 if __name__ == '__main__':
     main()

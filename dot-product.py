@@ -2,12 +2,11 @@ from math import acos, sqrt, degrees
 
 def main():
     vectors = []
-    numToDimention = ['x','y','z']
     dimensions = int(input('How many dimensions to the vectors: '))
     for vectorNum in range(2):
         vector = []
         for dimentionNum in range(dimensions):
-            vector.append(float(input(f'Vector {vectorNum+1} [{numToDimention[dimentionNum]}]: ')))
+            vector.append(float(input(f'Vector {vectorNum+1} [{dimentionNum}]: ')))
         vectors.append(vector)
     multiModulus = 1
     for i in range(2):
