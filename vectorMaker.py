@@ -6,35 +6,53 @@ load_dotenv('.env')
 
 pythag = lambda b, c: sqrt(abs(c**2 - b**2))
 rounded = lambda vector: [round(i, environ.get('ROUNDING')) for i in vector]
+checkKnown = lambda inputs, plane: [
+                                        known
+                                    for known in list(inputs[1].keys()) 
+                                    if known or 
+                                    (known[1]+known[0]) or 
+                                    (known[2]+known[1]+known[0]) in
+                                    [
+                                        plane[0::2], plane[1:], plane[:2], 
+                                        (plane[1:]+plane[0]), (plane[2]+plane[:2])
+                                    ]
+                                ]
+knowns = lambda inputs: [
+                            [
+                                [   
+                                    known
+                                for known in checkKnown(inputs, plane)
+                                if len(known) == 2
+                                ],
+                                [
+                                    known
+                                for known in checkKnown(inputs, plane)
+                                if len(known) == 3
+                                ]
+                            ]
+                        for plane in inputs[0]
+                        ]
 
-def calc(inputs, axes):
-    for plane in inputs:
-        if len((length:=list(plane['Length'].keys()))) == 2 and\
-        plane['rightAngle'][0::2] in length:
-            return pythag(length[0], length[1])  
+def calc(inputs):
+    print(knowns(inputs))
 
 def main():
     inputs = [
-            {
-                **{
-                    inputType: 
-                        {
-                            input(f'{inputType} Points on Plane {plane+1}: ').upper(): 
-                                float(input(f'{inputType} {i+1} on Plane {plane+1} Value: ')) 
-                        for i in range(int(input(f'No. {inputType} in Plane {plane+1}: ')))
-                        }
-                for inputType in ['Angle', 'Length']
+                [
+                    input(f'Right angle in plane [{plane+1}]: ').upper()
+                for plane in range(int(input('No. of planes: ')))
+                ],
+                {
+                    input(f'Known Points [{numKnown+1}]: ').upper():
+                        float(input(f'Known Value [{numKnown+1}]: '))
+                for numKnown in range(int(input('No. of known values: ')))
                 },
-                'rightAngle':
-                    input(f'Right Angle points on Plane {plane+1}: ').upper()
-            }
-        for plane in range(int(input('No. Planes: ')))
-        ]
-    axes = [
-                input(f'Points marking Axis[{i}]: ') 
-            for i in range(int(input('No. Dimensions: ')))
+                [
+                    input(f'Points marking Axis[{i}]: ').upper()
+                for i in range(int(input('No. Dimensions: ')))
+                ]
             ]
-    print(rounded(calc(inputs, axes)))
+    print(rounded(calc(inputs)))
     
 if __name__ == '__main__':
     main()
