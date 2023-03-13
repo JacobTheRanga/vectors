@@ -5,16 +5,18 @@ from os import environ
 load_dotenv('.env')
 
 def main():
-    squared = lambda x: sum([i**2 for i in x])
+    # calc = acos((V0x*V1x + V0y*V1y...)/sqrt((v0x^2+v0y^2...)*(v1x^2+v1y^2...)))
+    sq = lambda x: sum([i**2 for i in x])
     calc = lambda vectors: acos(sum(
                                     [vectors[0][i]*vectors[1][i] 
                                     for i in range(len(vectors[0]))]
                                     )
                                 /sqrt(
-                                    squared(vectors[0])*squared(vectors[1])
+                                    sq(vectors[0])*sq(vectors[1])
                                     )
                                 )
     dimensions = int(input('How many dimensions to the vectors: '))
+    # vectors [[v0x, v0y...][v1x, v1y...]]
     vectors = [[float(input(f'Vector {vector+1} [{dimension}]: ')) 
                 for dimension in range(dimensions)] 
                 for vector in range(2)]
