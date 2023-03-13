@@ -1,27 +1,25 @@
 from math import acos, sqrt, degrees
+from dotenv import load_dotenv
+from os import environ
+
+load_dotenv('.env')
 
 def main():
-    vectors = []
+    squared = lambda x: sum([i**2 for i in x])
+    calc = lambda vectors: acos(sum(
+                                    [vectors[0][i]*vectors[1][i] 
+                                    for i in range(len(vectors[0]))]
+                                    )
+                                /sqrt(
+                                    squared(vectors[0])*squared(vectors[1])
+                                    )
+                                )
     dimensions = int(input('How many dimensions to the vectors: '))
-    for vectorNum in range(2):
-        vector = []
-        for dimentionNum in range(dimensions):
-            vector.append(float(input(f'Vector {vectorNum+1} [{dimentionNum}]: ')))
-        vectors.append(vector)
-    multiModulus = 1
-    for i in range(2):
-        modulus = 0
-        for a in range(dimensions):
-            modulus += vectors[i][a]**2
-        multiModulus *= sqrt(modulus)
-    sumVector = 0
-    for i in range(dimensions):
-        timesVector = 1
-        for a in range(2):
-            timesVector *= vectors[a][i]
-        sumVector += timesVector
-    result = acos(sumVector/multiModulus)
-    return print(round(degrees(result), 4), 'degrees')
+    vectors = [[float(input(f'Vector {vector+1} [{dimension}]: ')) 
+                for dimension in range(dimensions)] 
+                for vector in range(2)]
+    result = round(degrees(calc(vectors)), int(environ.get('ROUNDING')))
+    return print(f'{result}{chr(176)}')
 
 if __name__ == '__main__':
     main()
