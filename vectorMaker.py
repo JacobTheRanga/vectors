@@ -4,23 +4,40 @@ from os import environ
 
 load_dotenv('.env')
 
-pythag = lambda b, c: sqrt(abs(c**2 - b**2))
 rounded = lambda vector: [round(i, environ.get('ROUNDING')) for i in vector]
 
+knowns = lambda plane, axis, inputs, length: [
+                                                known
+                                            for axisPoint in list(axis)
+                                            for known in list(inputs[1].keys())
+                                            if axisPoint in list(known)
+                                            if len(known) == len([i for i in list(known) if i in list(plane)])
+                                            if len(known) == length
+                                            ]
 vector = lambda inputs: [
-                            axis
+                            inputs[1][axis]
                         if axis in inputs[1]
-                        else
+                        else 
+                            sqrt(sum([i**2 for i in ]))
+                        if 
                             [
-                                {
-                                    known:
-                                        inputs[1][known]
-                                for point in list(axis)
-                                for known in list(inputs[1].keys())
-                                if len(known) == i
-                                if point in list(known)
-                                }
-                            for i in [2, 3]
+                                sqrt(sum(map(lambda x: x**2, knownAxisPlane[0])))
+                            if len(knownAxisPlane[0]) == 2
+                            else 
+
+                            for knownAxisPlane in
+                                [
+                                    [[
+                                        i
+                                    for i in knowns(plane, axis, inputs, 2)
+                                    ],
+                                    [
+                                        i
+                                    for i in knowns(plane, axis, inputs, 3)
+                                    ]]
+                                for plane in inputs[0]
+                                ]
+                            for plane in inputs[0]
                             ]
                         for axis in inputs[2]
                         ]
