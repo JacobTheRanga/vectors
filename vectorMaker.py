@@ -6,35 +6,24 @@ load_dotenv('.env')
 
 pythag = lambda b, c: sqrt(abs(c**2 - b**2))
 rounded = lambda vector: [round(i, environ.get('ROUNDING')) for i in vector]
-checkKnown = lambda inputs, plane: [
-                                        known
-                                    for known in list(inputs[1].keys()) 
-                                    if known or 
-                                    (known[1]+known[0]) or 
-                                    (known[2]+known[1]+known[0]) in
-                                    [
-                                        plane[0::2], plane[1:], plane[:2], 
-                                        (plane[1:]+plane[0]), (plane[2]+plane[:2])
-                                    ]
-                                ]
-knowns = lambda inputs: [
-                            [
-                                [   
-                                    known
-                                for known in checkKnown(inputs, plane)
-                                if len(known) == 2
-                                ],
-                                [
-                                    known
-                                for known in checkKnown(inputs, plane)
-                                if len(known) == 3
-                                ]
-                            ]
-                        for plane in inputs[0]
-                        ]
 
-def calc(inputs):
-    print(knowns(inputs))
+vector = lambda inputs: [
+                            axis
+                        if axis in inputs[1]
+                        else
+                            [
+                                {
+                                    known:
+                                        inputs[1][known]
+                                for point in list(axis)
+                                for known in list(inputs[1].keys())
+                                if len(known) == i
+                                if point in list(known)
+                                }
+                            for i in [2, 3]
+                            ]
+                        for axis in inputs[2]
+                        ]
 
 def main():
     inputs = [
@@ -52,7 +41,7 @@ def main():
                 for i in range(int(input('No. Dimensions: ')))
                 ]
             ]
-    print(rounded(calc(inputs)))
+    print(vector(inputs))
     
 if __name__ == '__main__':
     main()
