@@ -1,7 +1,8 @@
 from dotenv import load_dotenv
 from os import environ
+from os.path import dirname
 
-load_dotenv('../.env')
+load_dotenv(f'{dirname(dirname(__file__))}/.env')
 
 def rounded(inputs):
     roundNum = int(environ.get('ROUNDING'))
@@ -9,9 +10,8 @@ def rounded(inputs):
         return print([round(i, roundNum) for i in inputs])
     except:
         try:
-            return print([[round(i, roundNum) for i in a] for a in inputs])
+            for i in [[[round(i, roundNum) for i in a] for a in c] for c in inputs]:
+                print(i)
+            return
         except:
-            try:
-                return print([[[round(i, roundNum) for i in a] for a in c] for c in inputs])
-            except:
-                return print(round(inputs, roundNum))
+            return print(round(inputs, roundNum))
