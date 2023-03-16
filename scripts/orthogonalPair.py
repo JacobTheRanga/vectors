@@ -1,19 +1,14 @@
-from dotenv import load_dotenv
-from os import environ
-from dotProduct import calc
+from scripts import dotProduct
 
-load_dotenv('.env')
-
-rounded = lambda vectors: [[[round(c, environ.get('ROUNDING')) for c in i ]for i in a] for a in vectors]
-pairs = lambda vectors: [
+calc = lambda vectors: [
                             [vectors[i], vectors[a]]
                         for i in range(len(vectors))
                         for a in range(len(vectors))
-                        if calc([vectors[i], vectors[a]]) == 90
-                        if a != i
+                        if dotProduct.calc([vectors[i], vectors[a]]) == 90 and
+                        a > i
                         ]
 
-def main():
+def inputs():
     dimensions = int(input('No. of dimensions: '))
     inputs = [
                 [
@@ -22,9 +17,4 @@ def main():
                 ]
             for i in range(int(input('No. of vectors: ')))
             ]
-    for i in rounded(pairs(inputs)):
-        print(i)
-
-if __name__ == '__main__':
-    main()
-    
+    return calc(inputs)
