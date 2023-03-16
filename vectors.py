@@ -2,7 +2,6 @@ from scripts import *
 import argparse
 from dotenv import set_key, load_dotenv
 from os.path import exists
-from os import environ
 
 parser = argparse.ArgumentParser(description='Vectors Calculation Scripts')
 parser.add_argument('-c', '--config', nargs='*', help='Change config file settings. (rounding=4 | rounding 4)')
