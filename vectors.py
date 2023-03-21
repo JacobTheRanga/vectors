@@ -1,3 +1,53 @@
+"""
+Usage:
+
+---------------------------------------
+Run script with an input guide:
+---------------------------------------
+
+~/ vectors.py <script>
+= <script>.inputs()
+
+-----------------------------------------------
+Run script with an already established input:
+-----------------------------------------------
+
+~/ vectors.py -v <script>
+= <script>.calc(<values>)
+
+------------------------------------------------------------------------
+Run multiple scripts through each other's inputs with an input guide:
+------------------------------------------------------------------------
+
+~/ vectors.py <script1>/<script2>/<script3>
+= <script3>.calc(<script2>.calc(<script3>.inputs()))
+
+==========================================================================
+
+Config:
+
+------------------------------
+Change config variable:
+------------------------------
+
+~/ vectors.py -c
+Variable: <variable>
+Value: <value>
+
+or
+
+~/ vectors.py -c <variable>
+Value: <value>
+
+or
+
+~/ vectors.py -c <variable> <value>
+
+or
+
+~/ vectors.py -c <variable>=<value>
+"""
+
 from scripts import *
 import argparse
 from dotenv import set_key, load_dotenv
@@ -11,8 +61,10 @@ args = parser.parse_args()
 
 def config(pair):
     if pair == []:
-        return set_key('.env', input('Key: ').upper(), input('Value: '))
+        return set_key('.env', input('Variable: ').upper(), input('Value: '))
     if len(pair) == 1:
+        if '=' not in list(pair):
+            return set_key('.env', pair[0].upper(), input('Value: '))
         pair = ''.join(pair).split('=')
     return set_key('.env', pair[0].upper(), pair[1])
 

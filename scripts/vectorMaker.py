@@ -23,17 +23,14 @@ vector = lambda inputs: [
 def inputs():
     inputs = [
                 [
-                    input(f'Right angle in plane [{plane+1}]: ').upper()
-                for plane in range(int(input('No. of planes: ')))
+                    input(f'Points marking Axis[{i}]: ').upper()
+                for i in range(int(input('No. Dimensions: ')))
                 ],
                 {
                     input(f'Known Points [{numKnown+1}]: ').upper():
                         float(input(f'Known Value [{numKnown+1}]: '))
                 for numKnown in range(int(input('No. of known values: ')))
                 },
-                [
-                    input(f'Points marking Axis[{i}]: ').upper()
-                for i in range(int(input('No. Dimensions: ')))
-                ]
+                input('Vector points: ').upper()
             ]
     return vector(inputs)
