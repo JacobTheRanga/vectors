@@ -1,3 +1,17 @@
+"""
+Dot Product Calculator
+
+This script finds the angle between
+two vectors using the formula
+
+a.b = |a|*|b|*cos(θ)
+
+which is rearraged to get
+angle θ
+
+θ = acos((a.b)/(|a|*|b|))
+"""
+
 from math import acos, sqrt, degrees
 
 # calc = acos((V0x*V1x + V0y*V1y...)/sqrt((v0x^2+v0y^2...)*(v1x^2+v1y^2...)))
