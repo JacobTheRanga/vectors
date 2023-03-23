@@ -1,10 +1,18 @@
+"""
+Calculate pairs of vectors which are either
+parallel or orthogonal
+"""
+
 from scripts import dotProduct
 
-calc = lambda vectors: [
+parallel = lambda vectors: pairs(vectors, 180)
+orthogonal = lambda vectors: pairs(vectors, 90)
+
+pairs = lambda vectors, num: [
                             [vectors[i], vectors[a]]
                         for i in range(len(vectors))
                         for a in range(len(vectors))
-                        if dotProduct.calc([vectors[i], vectors[a]]) == 90 and
+                        if dotProduct.calc([vectors[i], vectors[a]]) == num and
                         a > i
                         ]
 
@@ -17,4 +25,6 @@ def inputs():
                 ]
             for i in range(int(input('No. of vectors: ')))
             ]
-    return calc(inputs)
+    if input('Parallel or Orthogonal: ').lower() == 'parallel':
+        return parallel(inputs)
+    return orthogonal(inputs)

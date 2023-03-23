@@ -120,10 +120,13 @@ def config(pair):
 def runScripts(scripts, values):
     if scripts == None:
         scripts = input('Scripts: ')
-    scripts, functions = scripts.split('.')
+    functions = False
+    if len(scripts.split('.')) > 1:
+        functions = scripts.split('.')[1]
+    scripts = scripts.split('.')[0]
     run = f"rounded.rounded({'.calc('.join([scripts.split('/')[len(scripts.split('/'))-i-1] for i in range(len(scripts.split('/')))])}.calc("
     if values != None:
-        if len(functions):
+        if functions:
             run = f'{run[:-5]}{functions}('
         return eval(f"{run}{eval(input('Values: '))}))")
     return eval(f"{run[:-5]}inputs())")
