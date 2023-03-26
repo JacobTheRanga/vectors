@@ -1,4 +1,5 @@
 """
+************************************************************
 Vectors Command Line Tool
 
 This script enables users to run all vector scripts
@@ -11,25 +12,31 @@ each other's inputs in order to solve complex problems
 Usage:
 
 ---------------------------------------
-Run script with an input guide:
+Run script with an input guide
 ---------------------------------------
 
 ~/ vectors.py <script>
 = <script>.inputs()
 
 -----------------------------------------------
-Run script with an already established input:
+Run script with an already established input
 -----------------------------------------------
 
 ~/ vectors.py -v <script>
 = <script>.calc(<values>)
 
 ------------------------------------------------------------------------
-Run multiple scripts through each other's inputs with an input guide:
+Run multiple scripts through each other's inputs with an input guide
 ------------------------------------------------------------------------
 
 ~/ vectors.py <script1>/<script2>/<script3>
 = <script3>.calc(<script2>.calc(<script3>.inputs()))
+
+--------------------------------------------------------
+Run sub-scripts with an already established input
+--------------------------------------------------------
+
+~/ vectors.py script
 
 ----------------------------------------------------------
 Get info about all other scripts
@@ -48,7 +55,7 @@ Get usage info about this script
 Config:
 
 ------------------------------
-Change config variable:
+Change config variable
 ------------------------------
 
 ~/ vectors.py -c
@@ -98,7 +105,9 @@ def listScripts():
     for i in [
                 a.__name__.split('.')[1] 
             for a in modules.values() 
-            if a.__name__.split('.')[0] == 'scripts' and a.__name__ != 'scripts'
+            if a.__name__.split('.')[0] == 'scripts' and 
+            a.__name__ != 'scripts' and
+            a.__name__.split('.')[1] != 'rounded'
             ]:
         print(f'    -   {i}')
     return print('Get usage info with:\n~/ vectors.py -i <script>')

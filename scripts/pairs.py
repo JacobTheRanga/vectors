@@ -1,6 +1,8 @@
 """
 Calculate pairs of vectors which are either
 parallel or orthogonal
+
+Input Format: [[v1x, v1y, v1z], [v2x, v2y, v2z], ...]
 """
 
 from scripts import dotProduct

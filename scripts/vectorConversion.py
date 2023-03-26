@@ -1,3 +1,15 @@
+"""
+Convert between vector types
+
+There are two sub-scripts within
+this script
+
+    -   unitCalc
+    -   changeMagnitude
+
+Input Format: [vx, vy, ...]
+"""
+
 from math import sqrt
 
 unitCalc = lambda vector: [i/sqrt(sum([x**2 for x in vector])) for i in vector]

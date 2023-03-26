@@ -1,5 +1,7 @@
 """
-Cross Product Calculation
+Calculate cross product of two vectors
+
+Input Format: [[v1x, v1y, v1z], [v2x, v2y, v2z]]
 """
 
 calc = lambda vectors: [vectors[0][1]*vectors[1][2] - vectors[0][2]*vectors[1][1],

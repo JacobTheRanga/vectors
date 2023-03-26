@@ -1,3 +1,8 @@
+"""
+STILL IN DEVELOPMENT
+(NOT CURRENTLY WORKING)
+"""
+
 from math import sin, cos, tan, sqrt
 
 vector = lambda inputs: [

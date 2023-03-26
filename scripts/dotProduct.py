@@ -10,6 +10,8 @@ which is rearraged to get
 angle θ
 
 θ = acos((a.b)/(|a|*|b|))
+
+Input Format: [[v1x, v1y, ...], [v2x, v2y, ...]]
 """
 
 from math import acos, sqrt, degrees
