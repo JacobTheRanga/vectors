@@ -1,7 +1,8 @@
 """
 STILL IN DEVELOPMENT
-(NOT CURRENTLY WORKING)
 """
+
+__working__ = False
 
 from math import sin, cos, tan, sqrt
 

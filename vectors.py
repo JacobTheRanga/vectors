@@ -81,6 +81,7 @@ from argparse import ArgumentParser
 from dotenv import set_key, load_dotenv
 from os.path import exists
 from sys import modules
+from inspect import getmembers, isfunction
 
 parser = ArgumentParser(description='Vectors Calculation Scripts')
 parser.add_argument('-l', '--list', 
@@ -109,13 +110,32 @@ def listScripts():
             a.__name__ != 'scripts' and
             a.__name__.split('.')[1] != 'rounded'
             ]:
-        print(f'    -   {i}')
-    return print('Get usage info with:\n~/ vectors.py -i <script>')
+        txt = f'\n    -   {i}'
+        try:
+            if not eval(f'{i}.__working__'):
+                txt += ' (NOT CURRENTLY WORKING)'
+        except:
+            pass
+        print(txt)
+        for name in [
+                        name[0]
+                    for name in eval(f'getmembers({i}, isfunction)')
+                    if name[0] != 'inputs' and
+                    'calc' not in ' '.join([i[0] for i in eval(f'getmembers({i}, isfunction)')]).split(' ')
+                    ]:
+            print(f'      +   {name}')
+    return print('\nGet usage info with:\n~/ vectors.py -i <script>')
 
 def info(script):
     if script == True:
         return print(__doc__)
-    return eval(f'print({script}.__doc__)')
+    txt = eval(f'{script}.__doc__')
+    try:
+        if not eval(f'{script}.__working__'):
+            txt += '\n(NOT CURRENTLY WORKING)'
+    except:
+        pass
+    return print(txt)
 
 def config(pair):
     if pair == []:

@@ -6,14 +6,12 @@ mathematical operator to combine multiple
 vectors
 
 Input Format: [[[v1x, v1y, ...], [v2x, v2y, ...], ...], 'operator']
-
-[NOT WORKING CURRENTLY]
 """
 
 calc = lambda inputs: [
                             eval(inputs[1].join(
                                 [
-                                    inputs[0][num][i]
+                                    str(inputs[0][num][i])
                                 for num in range(len(inputs[0]))
                                 ]
                             ))
@@ -30,4 +28,4 @@ def inputs():
             for num in range(int(input('No. Vectors: ')))],
             input('Operator: ')
             ]
-    return calc([inputs])
+    return calc(inputs)
